@@ -1,0 +1,194 @@
+:root {
+  --bg: #16181d;
+  --panel: #1e2128;
+  --card: #232730;
+  --line: #333845;
+  --text: #e8e9ed;
+  --muted: #9aa0ad;
+  --accent: #7c5cff;
+  --danger: #e05d5d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 24px 64px;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 8px;
+}
+
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 16px; margin: 0 0 8px; }
+h3 { font-size: 16px; margin: 0; }
+
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.hidden { display: none !important; }
+.error { color: var(--danger); font-size: 14px; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+label { display: block; font-size: 14px; margin-bottom: 8px; }
+
+input[type="text"], input[type="password"], input[type="search"], select, textarea {
+  background: #14161b;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 8px 10px;
+  font: inherit;
+  width: 100%;
+}
+
+textarea { resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.row > input[type="text"], .row > input[type="search"] { flex: 1 1 240px; }
+.row > select { flex: 0 0 auto; width: auto; }
+
+button, .ghost {
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  padding: 8px 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+button.ghost, a.ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--muted);
+}
+button.ghost:hover, a.ghost:hover { color: var(--text); border-color: var(--muted); }
+button.danger:hover { color: var(--danger); border-color: var(--danger); }
+
+/* Tags -------------------------------------------------------------------- */
+
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+
+.tag {
+  border: 1px solid;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 3px 10px;
+  background: transparent;
+  color: inherit;
+}
+.tag.active { color: #fff; }
+.tag .x { margin-left: 6px; opacity: 0.6; }
+.tag .x:hover { opacity: 1; }
+
+/* The delete control on a filter tag. Sits apart from the label so a
+   mis-click toggles the filter rather than deleting the tag. */
+.tag .del {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1;
+  margin-left: 4px;
+  padding: 0 2px;
+  vertical-align: -1px;
+}
+.tag .del:hover { color: var(--danger); opacity: 1; }
+
+/* Scan results ------------------------------------------------------------ */
+
+.scan-result { margin-top: 12px; font-size: 14px; }
+.scan-result p { margin: 0 0 8px; }
+.scan-group { margin-bottom: 12px; }
+.scan-group h4 { margin: 0 0 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.scan-group ul { margin: 0; padding-left: 20px; color: #c7cbd4; }
+.scan-group li { margin-bottom: 2px; }
+
+/* Grid -------------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.thumb-wrap { position: relative; background: #101216; }
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+}
+
+.card-body { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.summary { margin: 0; font-size: 14px; color: #c7cbd4; }
+.author { margin: 0; }
+.versions { margin: 0; }
+
+.checkboxes { display: flex; gap: 16px; font-size: 13px; color: var(--muted); }
+.check { display: flex; align-items: center; gap: 6px; }
+
+.box {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  display: inline-block;
+}
+.check.on { color: var(--text); }
+.check.on .box {
+  background: #4caf50;
+  border-color: #4caf50;
+  position: relative;
+}
+.check.on .box::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #fff;
+}
+
+.actions { margin-top: 4px; }
+.actions > * { font-size: 13px; padding: 6px 10px; }

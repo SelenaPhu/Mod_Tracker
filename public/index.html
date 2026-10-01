@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stardew Mod Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Stardew Mod Tracker</h1>
+  <button id="settings-btn" class="ghost">Settings</button>
+</header>
+
+<!-- First-run setup, shown until an API key is saved -->
+<section id="setup" class="panel hidden">
+  <h2>Setup</h2>
+  <p class="muted">
+    Your Nexus API key comes from your Nexus Mods account settings, under the API tab.
+    It is stored only on this machine, in the database file listed below.
+  </p>
+  <label>Nexus API key
+    <input type="password" id="api-key" placeholder="paste your key here" autocomplete="off">
+  </label>
+  <label>Mods folder
+    <input type="text" id="mods-folder" placeholder="C:\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods">
+  </label>
+  <div class="row">
+    <button id="save-settings">Save</button>
+    <span id="db-path" class="muted small"></span>
+  </div>
+</section>
+
+<!-- Folder scan -->
+<section class="panel">
+  <div class="row">
+    <button id="scan-btn">Scan Mods folder</button>
+    <span id="scan-status" class="muted small"></span>
+  </div>
+  <div id="scan-result" class="scan-result hidden"></div>
+</section>
+
+<!-- Add a mod -->
+<section class="panel">
+  <label for="add-input">Add a mod</label>
+  <div class="row">
+    <input type="text" id="add-input"
+           placeholder="Paste a Nexus link, e.g. https://www.nexusmods.com/stardewvalley/mods/7286">
+    <button id="add-btn">Add</button>
+  </div>
+  <p id="add-error" class="error hidden"></p>
+</section>
+
+<!-- Search and filters -->
+<section class="panel">
+  <div class="row">
+    <input type="search" id="search" placeholder="Search names, authors, summaries, notes, tags…">
+    <select id="status">
+      <option value="all">All mods</option>
+      <option value="installed">In my Mods folder</option>
+      <option value="tried">Tried before</option>
+      <option value="interested">Interested only</option>
+    </select>
+    <select id="sort">
+      <option value="name">Sort: name</option>
+      <option value="added">Sort: recently added</option>
+      <option value="updated">Sort: recently refreshed</option>
+    </select>
+  </div>
+  <div id="tag-filters" class="tag-row"></div>
+</section>
+
+<p id="count" class="muted small"></p>
+<div id="grid" class="grid"></div>
+<p id="empty" class="muted hidden">Nothing here yet. Paste a Nexus link above to add your first mod.</p>
+
+<template id="card-template">
+  <article class="card">
+    <div class="thumb-wrap">
+      <img class="thumb" alt="">
+      <span class="badge hidden"></span>
+    </div>
+    <div class="card-body">
+      <h3 class="name"></h3>
+      <p class="author muted small"></p>
+      <p class="summary"></p>
+
+      <div class="checkboxes">
+        <span class="check" data-kind="history"><span class="box"></span> Tried before</span>
+        <span class="check" data-kind="installed"><span class="box"></span> In Mods folder</span>
+      </div>
+
+      <p class="versions muted small"></p>
+      <div class="tag-row card-tags"></div>
+
+      <div class="row tag-add">
+        <input type="text" class="tag-input" placeholder="add a tag…" list="tag-options">
+      </div>
+
+      <textarea class="notes" rows="2" placeholder="Your notes…"></textarea>
+
+      <div class="row actions">
+        <a class="ghost nexus-link" target="_blank" rel="noopener">Open on Nexus</a>
+        <button class="ghost refresh">Refresh</button>
+        <button class="ghost danger remove">Remove</button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<datalist id="tag-options"></datalist>
+
+<script src="app.js"></script>
+</body>
+</html>
